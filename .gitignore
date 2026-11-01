@@ -1,0 +1,23 @@
+node_modules/
+dist/
+*.tsbuildinfo
+
+.env
+.env.*
+!.env.example
+
+# pnpm's lockfile is the one committed; another installer must not add a second
+package-lock.json
+npm-shrinkwrap.json
+bun.lock
+bun.lockb
+yarn.lock
+
+tmp/*
+!tmp/.gitkeep
+*.log
+
+.DS_Store
+.idea/
+.vscode/
+.claude/settings.local.json

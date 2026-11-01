@@ -1,0 +1,6 @@
+Runs several processes side by side as one: every output line tagged with the name of the
+process that wrote it, and all of them stopped as soon as one ends (dev watchers + backend,
+a server + a test run, a local stack). Signals go to whole process groups, so grandchildren
+(vite under pnpm, a server under node --watch) stop too; SIGKILL after a timeout, a second
+Ctrl-C exits at once. Optional exitWith child decides the exit code. CLI
+(`run-all 'web=pnpm dev' 'api=node main.ts'`, npm bin) and library (`runAll()`). POSIX only.

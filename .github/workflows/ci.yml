@@ -1,0 +1,26 @@
+name: ci
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  # Node LTS is the dev runtime, the reference and the gate: a red run here blocks.
+  # Nothing runs on Deno or Bun. Both supported platforms: pipes and process groups
+  # behave differently on macOS (asynchronous pipe writes, another /bin/sh).
+  node:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v6
+      # pnpm version is read from package.json "packageManager".
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run ci

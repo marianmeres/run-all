@@ -1,0 +1,65 @@
+{
+  "name": "@marianmeres/run-all",
+  "version": "0.1.0",
+  "description": "Run several processes side by side as one: prefixed output, shared fate, clean process-group shutdown. CLI and library.",
+  "license": "MIT",
+  "author": "Marian Meres",
+  "type": "module",
+  "packageManager": "pnpm@12.16.1",
+  "engines": {
+    "node": ">=24.12"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "bin": {
+    "run-all": "./dist/bin.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marianmeres/run-all.git"
+  },
+  "bugs": {
+    "url": "https://github.com/marianmeres/run-all/issues"
+  },
+  "homepage": "https://github.com/marianmeres/run-all#readme",
+  "keywords": [
+    "parallel",
+    "concurrently",
+    "processes",
+    "process-group",
+    "signals",
+    "prefix",
+    "dev",
+    "cli"
+  ],
+  "scripts": {
+    "build": "pnpm run clean && tsc -p tsconfig.build.json",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "test": "node --test --test-timeout=30000 \"tests/**/*.test.ts\"",
+    "test:watch": "node --test --watch --test-timeout=30000 \"tests/**/*.test.ts\"",
+    "ci": "pnpm run typecheck && pnpm run lint && pnpm test",
+    "prepublishOnly": "pnpm run ci && pnpm run build",
+    "release": "npx --yes @marianmeres/release@^2.2.0",
+    "rp": "pnpm run release -y && pnpm publish",
+    "rpm": "pnpm run release minor -y && pnpm publish"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.6.3",
+    "@types/node": "^26.6.5",
+    "typescript": "^7.0.2"
+  }
+}
