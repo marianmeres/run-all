@@ -1,6 +1,6 @@
 {
   "name": "@marianmeres/run-all",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Run several processes side by side as one: prefixed output, shared fate, clean process-group shutdown. CLI and library.",
   "license": "MIT",
   "author": "Marian Meres",
